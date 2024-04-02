@@ -1,0 +1,71 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-migrate
+  namespace: dev-starter-pack-naughty-swanson
+  labels:
+    app.kubernetes.io/name: django
+spec:
+  backoffLimit: 4
+  activeDeadlineSeconds: 60
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: django-migrate-container
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - configMapRef:
+              name: django
+        env:
+          - name: DJ__SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: django
+                key: secret_key
+                optional: false
+          - name: ROLLBAR__BACKEND_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: rollbar
+                key: backend_token
+                optional: false
+          - name: POSTGRES_DSN
+            valueFrom:
+              secretKeyRef:
+                name: postgres
+                key: dsn
+                optional: false
+          - name: TG__WEBHOOK_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: tg-bot
+                key: webhook_token
+                optional: false
+          - name: TG__BOT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: tg-bot
+                key: token
+                optional: false
+          - name: S3_DSN
+            valueFrom:
+              secretKeyRef:
+                name: bucket
+                key: dsn
+                optional: false
+        image: cr.yandex/crpqm6ldnek2niaf4bsn/django:<COMMIT_HASH>
+        volumeMounts:
+          - mountPath: "/root/.postgresql/"
+            name: psql-cert
+            readOnly: true
+        command:
+          - python3
+          - manage.py
+          - migrate
+          - --no-input
+      volumes:
+        - name: psql-cert
+          secret:
+            secretName: psql-root-crt

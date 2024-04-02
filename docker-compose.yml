@@ -1,0 +1,109 @@
+version: '3.7'
+
+services:
+
+  postgres:
+    image: postgres:14.8
+    environment:
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: postgres_db
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
+
+  django:
+    container_name: django
+    build:
+      context: ./
+    environment:
+      WEBAPP_ROOT_URL: http://127.0.0.1:8000
+      POSTGRES_DSN: postgres://postgres_user:postgres_password@postgres:5432/postgres_db
+      DJ__SECRET_KEY: empty
+      DJ__DEBUG: 'true'
+      DJ__ALLOWED_HOSTS: '127.0.0.1, localhost, .ngrok-free.app'
+      DJ__CSRF_TRUSTED_ORIGINS: 'https://*.ngrok-free.app'
+      ENABLE_DEBUG_TOOLBAR: 'true'
+      ENABLE_MEDIA_FILES_SERVING: 'true'
+      TG_BOT_LOGGING_LEVEL: 'DEBUG'
+      DJANGO_TG_BOT_FRAMEWORK_LOGGING_LEVEL: 'DEBUG'
+      GUNICORN_CMD_ARGS: '--reload --workers 2'
+      TG__BOT_TOKEN: ${TG__BOT_TOKEN?error}
+      DJANGO_SUPERUSER_USERNAME: 'admin'
+      DJANGO_SUPERUSER_LAST_NAME: 'Админский'
+      DJANGO_SUPERUSER_FIRST_NAME: 'Пользователь'
+      DJANGO_SUPERUSER_PASSWORD: 'admin123'
+      DJANGO_SUPERUSER_EMAIL: 'admin@example.com'
+    ports:
+      - 127.0.0.1:8000:80
+    volumes:
+      - ./media:/media/
+      - ./src:/opt/app/src/
+      - ./pyproject.toml:/opt/app/pyproject.toml
+      - ./poetry.lock:/opt/app/poetry.lock
+    depends_on:
+      - postgres
+
+  polling:
+    container_name: polling
+    build:
+      context: ./
+    environment:
+      WEBAPP_ROOT_URL: http://127.0.0.1:8000
+      POSTGRES_DSN: postgres://postgres_user:postgres_password@postgres:5432/postgres_db
+      DJ__SECRET_KEY: empty
+      DJ__DEBUG: 'true'
+      DJ__ALLOWED_HOSTS: '127.0.0.1, localhost, .ngrok-free.app'
+      DJ__CSRF_TRUSTED_ORIGINS: 'https://*.ngrok-free.app'
+      ENABLE_DEBUG_TOOLBAR: 'true'
+      ENABLE_MEDIA_FILES_SERVING: 'true'
+      TG_BOT_LOGGING_LEVEL: 'DEBUG'
+      DJANGO_TG_BOT_FRAMEWORK_LOGGING_LEVEL: 'DEBUG'
+      GUNICORN_CMD_ARGS: '--reload --workers 2'
+      TG__BOT_TOKEN: ${TG__BOT_TOKEN?error}
+      DJANGO_SUPERUSER_USERNAME: 'admin'
+      DJANGO_SUPERUSER_LAST_NAME: 'Админский'
+      DJANGO_SUPERUSER_FIRST_NAME: 'Пользователь'
+      DJANGO_SUPERUSER_PASSWORD: 'admin123'
+      DJANGO_SUPERUSER_EMAIL: 'admin@example.com'
+    volumes:
+      - ./media:/media/
+      - ./src:/opt/app/src/
+      - ./pyproject.toml:/opt/app/pyproject.toml
+      - ./poetry.lock:/opt/app/poetry.lock
+    depends_on:
+      - postgres
+    command: ./manage.py run_polling --reload "tg_bot.urls.process_tg_update" "ENV.TG.BOT_TOKEN"
+
+  trigger_mailing_worker:
+    container_name: trigger_mailing_worker
+    build:
+      context: ./
+    environment:
+      WEBAPP_ROOT_URL: http://127.0.0.1:8000
+      POSTGRES_DSN: postgres://postgres_user:postgres_password@postgres:5432/postgres_db
+      DJ__SECRET_KEY: empty
+      DJ__DEBUG: 'true'
+      TG_BOT_LOGGING_LEVEL: 'DEBUG'
+      DJANGO_TG_BOT_FRAMEWORK_LOGGING_LEVEL: 'DEBUG'
+      TG__BOT_TOKEN: ${TG__BOT_TOKEN?error}
+    volumes:
+      - ./media:/media/
+      - ./src:/opt/app/src/
+      - ./pyproject.toml:/opt/app/pyproject.toml
+      - ./poetry.lock:/opt/app/poetry.lock
+    depends_on:
+      - postgres
+    command: ./manage.py run_worker "trigger_mailing.funnels.mailing_queue" -v 3 --reload
+
+  linters:
+    build:
+      context: ./.linters/
+    volumes:
+      - ./.linters/pyproject.toml:/opt/linters/pyproject.toml
+      - ./.linters/poetry.lock:/opt/linters/poetry.lock
+      # mount source code to check a code with linter running inside a container
+      - ./src:/src
+    command: 'echo Skipped'
+
+volumes:
+  postgres_data_test:

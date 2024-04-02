@@ -1,0 +1,22 @@
+build-django:
+  stage: build
+  tags:
+    - dev-starter-pack-naughty-swanson
+  image:
+    # Используем kaniko для создания образов внутри контейнера.
+    # GitLab runner requires to use `*-debug` kaniko images to get access to sh
+    name: gcr.io/kaniko-project/executor:v1.13.0-debug
+    entrypoint: [""]
+  script:
+    # Container Registry credentials was already mounted to /kaniko/.docker/config.json file by GitLab Runner
+    # Сборка и отправка образа контейнера в реестр. Образ отмечен хэшем коммита.
+    # --use-new-run -- workaround performance issue https://github.com/GoogleContainerTools/kaniko/issues/875
+    # --cache=true -- enables cache with Yandex.Cloud Container Registry
+    # --cache-copy-layers -- caches in repository not only `RUN` but `COPY` сommand too.
+    - /kaniko/executor
+        --context "${CI_PROJECT_DIR}"
+        --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+        --destination "cr.yandex/crp3h04khu638hf0ob6l/django:${CI_COMMIT_SHA}"
+        --use-new-run
+        --cache=true
+        --cache-copy-layers
