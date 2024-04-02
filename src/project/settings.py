@@ -62,13 +62,9 @@ INSTALLED_APPS = [
     'django_json_widget',
     'django_workers',
     'storages',
-    'polling',
-    'django_tg_bot_framework.editable_messages.apps.EditableMessagesConfig',
 
     # custom apps
     'auth.apps.AuthConfig',
-    'tg_bot.apps.TgBotConfig',
-    'trigger_mailing.apps.AppConfig',
 ]
 
 MIDDLEWARE = [

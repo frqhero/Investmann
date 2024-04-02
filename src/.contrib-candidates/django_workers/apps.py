@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class TgBotConfig(AppConfig):
+class AppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'tg_bot'
-    verbose_name = 'Чат-бот'
+    name = 'django_workers'
+    verbose_name = 'Django Workers'

@@ -24,7 +24,6 @@ from django.views.static import serve
 urlpatterns = [
     path('', lambda request: redirect('admin:index')),
     path('admin/', admin.site.urls),
-    path('webhook/', include('tg_bot.urls')),
 ]
 
 if settings.ENV.ENABLE_MEDIA_FILES_SERVING:
