@@ -15,18 +15,15 @@ pydantic = "1.10.8"
 psycopg2-binary = "2.9.6"
 pytest = {version = "7.3.*", extras = ["anyio"]}
 pytest-django = "4.5.2"
-anyio = "3.7.0"
 pytest-httpx = "0.22.0"
 django-non-dark-admin = "2.0.2"
 rollbar = "0.16.3"
 django-storages = "^1.13.2"
 boto3 = "^1.26.149"
-django-json-widget = "1.1.1"
 s3-parse-url = "0.3.3"
 tg-api = "1.5.0"
 pillow = "^10.1.0"
 inotify = "0.2.10"  # required by Gunicorn to support --reload feature
-chevron = "^0.14.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -33,11 +33,6 @@ ALLOWED_HOSTS = ENV.DJ.ALLOWED_HOSTS
 
 CSRF_TRUSTED_ORIGINS = ENV.DJ.CSRF_TRUSTED_ORIGINS
 
-sys.path.insert(
-    0,
-    (BASE_DIR / '.contrib-candidates/django_tg_bot_framework').as_posix(),
-)
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -59,7 +54,6 @@ INSTALLED_APPS = [
 
     # third party apps
     'debug_toolbar',
-    'django_json_widget',
     'django_workers',
     'storages',
 
@@ -208,32 +202,3 @@ if ENV.ROLLBAR:
             'safe_repr': False,  # enable repr(obj)
         },
     }
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'tg_bot': {
-            'handlers': ['console'],
-            'level': ENV.TG_BOT_LOGGING_LEVEL,
-            'propagate': False,
-        },
-        'django_tg_bot_framework': {
-            'handlers': ['console'],
-            'level': ENV.DJANGO_TG_BOT_FRAMEWORK_LOGGING_LEVEL,
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-    },
-}
-
-BOT_LANGUAGES = {
-    'ru': 'русский',
-    'en': 'английский',
-}

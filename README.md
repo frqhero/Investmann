@@ -26,7 +26,6 @@
 Для локального развертывания приложения необходимо в корне проекта создать файл `.env` со следующими переменными:
 
 ```shell
-TG__BOT_TOKEN=your_tg_bot_token
 ```
 
 ## Работа с кодом с использованием docker
@@ -50,20 +49,11 @@ $ docker compose pull --ignore-buildable
 $ docker compose build
 ```
 
-Для запуска сайта вам понадобится телеграм-бот. Зарегистрируйте своего отладочного бота в [BotFather](https://t.me/BotFather), получите токен и положите его в файл `.env` в корне проекта:
-
-```sh
-# file .env:
-TG__BOT_TOKEN="1616161616:AAF01OAAF01OAAF01OAAF01OAAF01O"
-```
-
 Запустите докер-контейнеры и не выключайте:
 
 ```shell
 $ docker compose up
 ```
-
-По-умолчанию бот запущен в режиме polling и работает после запуска докер-контейнеров.
 
 Накатить миграции можно с помощью команды:
 
@@ -72,10 +62,6 @@ $ docker compose run --rm django python manage.py migrate
 ```
 
 Сайт доступен по адресу [127.0.0.1:8000](http://127.0.0.1:8000). Вход в админку находится по адресу [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/). Вы можете создать суперпользователя командой:
-
-Все сообщения бота хранятся в БД. В проекте приложен архив сообщений, который можно загрузить в вэб интерфейсе.
-Перейдите на страницу на странице [Сообщения бота](http://127.0.0.1:8000/admin/editable_messages/tgmessageseries/)
-и нажмите на `Загрузить сообщения`
 
 ```shell
 $ docker compose run --rm django python manage.py createsuperuser --no-input
@@ -264,19 +250,6 @@ $ docker compose run --rm django pytest -s test_tools_for_testing.py::test_httpx
 
 - [Инструкции к окружению `.deploy/dev-starter-pack-naughty-swanson`](.deploy/dev-starter-pack-naughty-swanson/README.md)
 
-## Запуск Telegram бота с использованием вебхука
-
-Если планируете использовать webhook, cлужба `polling` не должна работать. Остановить ее можно командой:
-
-```bash
-docker compose stop polling
-```
-
-Для работы телеграм-бота надо зарегистрировать вебхук на серверах Telegram, а для этого понадобится публичный адрес.
-Получить его можно с помощью [https://ngrok.com/](https://ngrok.com/).<br>
-Перейдите по ссылке и пройдите регистрацию.
-На сайте будут подробные инструкции по установке **ngrok** на вашу операционную систему.<br>
-
 Чтобы получить публичный IP адрес для вашей разработческой машины сначала авторизуйте ngrok с помощью команды
 `ngrok config add-authtoken`, как это указано в личном кабинете на сайте [https://ngrok.com/](https://ngrok.com/), а затем запустите
 команду:
@@ -302,15 +275,3 @@ Ngrok сообщит вам публичный адрес и начнём про
 `DJ__CSRF_TRUSTED_ORIGINS`, иначе Django откажется обрабатывать входящие сообщения от серверов Telegram.
 Если вы используете бесплатную версию Ngrok, то всё уже настроено заранее и ничего предпринимать не надо. А если у вас
 платная версия, то сверьте полученный публичный адрес с указанными в настройках. Если они отличаются, то подмените их с помощью `docker-compose.override.yml`, затем перезапустите сервисы. [Подробнее про override-файл](https://docs.docker.com/compose/extends/#multiple-compose-files).
-
-Теперь осталось сообщить серверу телеграм, о нашем webhook-сервере:
-
-```shell
-$ # Замените `https://example.ngrok-free.app` на полученный от ngrok публичный адрес
-$ PUBLIC_URL="https://example.ngrok-free.app"
-$ # Замените `1613441681:example` на токен вашего телеграм бота
-$ TG__BOT_TOKEN="1613441681:example"
-$ curl https://api.telegram.org/bot${TG__BOT_TOKEN}/setWebhook
-$ curl -F "url=${PUBLIC_URL}/webhook/" https://api.telegram.org/bot${TG__BOT_TOKEN}/setWebhook
-{"ok":true,"result":true,"description":"Webhook was set"}
-```
