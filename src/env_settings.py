@@ -1,7 +1,7 @@
 from functools import cached_property
 from typing import Literal, Any
 
-from pydantic import AnyUrl, BaseSettings, BaseModel, PostgresDsn, AnyHttpUrl, Field, validator
+from pydantic import AnyUrl, BaseSettings, PostgresDsn, AnyHttpUrl, Field, validator
 from s3_parse_url import parse_s3_dsn, S3DataSource
 
 LogLevel = Literal[
@@ -18,11 +18,6 @@ def parse_comma_separated(value: Any) -> Any:
         return value
 
     return [item.strip() for item in value.split(",") if item]
-
-
-class TelegramSettings(BaseModel):
-    WEBHOOK_TOKEN: str = ''
-    BOT_TOKEN: str
 
 
 class DjangoSettings(BaseSettings):
@@ -82,11 +77,6 @@ class EnvSettings(BaseSettings):
         description='S3 credentials DSN in format specified by s3-parse-url lib. '
                     'Docs: https://github.com/marazmiki/s3-parse-url/tree/master',
     )
-
-    TG_BOT_LOGGING_LEVEL: LogLevel = Field(default='WARNING')
-    DJANGO_TG_BOT_FRAMEWORK_LOGGING_LEVEL: LogLevel = Field(default='WARNING')
-
-    TG: TelegramSettings
 
     class Config:
         env_nested_delimiter = '__'
