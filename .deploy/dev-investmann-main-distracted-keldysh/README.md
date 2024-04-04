@@ -1,10 +1,10 @@
-# Инструкции по деплою ПО в окружение dev-starter-pack-naughty-swanson
+# Инструкции по деплою ПО в окружение dev-investmann-main-distracted-keldysh
 
 [toc]
 
 ## Первичный деплой в окружение
 
-В облаке уже должны быть выделены ресурсы. [dev-starter-pack-naughty-swanson](https://sirius-env-registry.website.yandexcloud.net/dev-starter-pack-naughty-swanson.html).
+В облаке уже должны быть выделены ресурсы. [dev-investmann-main-distracted-keldysh](https://sirius-env-registry.website.yandexcloud.net/dev-investmann-main-distracted-keldysh.html).
 
 Установите и настройте себе `kubectl` локально прежде, чем двигаться дальше по инструкциям. Подключитесь к кластеру Kubernetes в namespace окружения.
 
@@ -15,7 +15,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: django
-  namespace: dev-starter-pack-naughty-swanson
+  namespace: dev-investmann-main-distracted-keldysh
 stringData:
   secret_key: "your-secret-key"  # Придумайте свой секретный ключ и укажите его здесь
 ```
@@ -74,7 +74,7 @@ $ ./manage.py createsuperuser
 Для выхода из bash-оболочки пода введите `exit`.
 
 
-Админ-панель будет доступна по адресу [https://dev-starter-pack-naughty-swanson.sirius-k8s.dvmn.org/admin](https://dev-starter-pack-naughty-swanson.sirius-k8s.dvmn.org/admin). Для авторизации введите имя и пароль созданного суперюзера.
+Админ-панель будет доступна по адресу [https://dev-investmann-main-distracted-keldysh.sirius-k8s.dvmn.org/admin](https://dev-investmann-main-distracted-keldysh.sirius-k8s.dvmn.org/admin). Для авторизации введите имя и пароль созданного суперюзера.
 
 
 ## Обновление уже развернутого ПО
@@ -109,7 +109,7 @@ $ ./deploy.sh
 # Commit hash of deployed version:: c900c9221d62e24ef227e2c427db5caaed81d051
 ```
 
-Админ-панель будет доступна по адресу [https://dev-starter-pack-naughty-swanson.sirius-k8s.dvmn.org/admin/](https://dev-starter-pack-naughty-swanson.sirius-k8s.dvmn.org/admin/). Логин и пароль суперпользователя можно узнать у менеджера проекта и/или владельца окружения.
+Админ-панель будет доступна по адресу [https://dev-investmann-main-distracted-keldysh.sirius-k8s.dvmn.org/admin/](https://dev-investmann-main-distracted-keldysh.sirius-k8s.dvmn.org/admin/). Логин и пароль суперпользователя можно узнать у менеджера проекта и/или владельца окружения.
 
 Если с последнего деплоя изменился только ConfigMap, но не хэш коммита, то Django Deployment может не заменить изменений и тогда он продолжит работать со старыми настройками. Принудительно перезапустить веб-сервер Django можно командой:
 
@@ -142,7 +142,7 @@ $ git stash pop
 В окружении должен быть secret с именем `bucket` и ключом `dsn`; в ключе `dsn` находятся параметры подключения в формате:
 
 ```yaml
-yandex://access_key:secret_key@dev-starter-pack-naughty-swanson/
+yandex://access_key:secret_key@dev-investmann-main-distracted-keldysh/
 ```
 
 где
@@ -150,4 +150,4 @@ yandex://access_key:secret_key@dev-starter-pack-naughty-swanson/
 - `yandex` - название облачного сервиса. В файле `setting.py` из этой настройки будет установлен параметр `AWS_S3_ENDPOINT_URL` - адрес подключения к S3;
 - `access_key` - ключ доступа, например, `ABCDEF1ghIJKlmn2opqR3sTU4`. В файле `setting.py` из этой настройки будет установлен параметр `AWS_ACCESS_KEY_ID`;
 - `secret_key` - секретный ключ, например, `ABCDeFGHIg-1KLmnOpqrSTuVw2XYZabC3DeFghI`. В файле `setting.py` из этой настройки будет установлен параметр `AWS_SECRET_ACCESS_KEY`;
-- `dev-starter-pack-naughty-swanson` - имя корзины. В файле `setting.py` из этой настройки будет установлен параметр `AWS_STORAGE_BUCKET_NAME`;
+- `dev-investmann-main-distracted-keldysh` - имя корзины. В файле `setting.py` из этой настройки будет установлен параметр `AWS_STORAGE_BUCKET_NAME`;

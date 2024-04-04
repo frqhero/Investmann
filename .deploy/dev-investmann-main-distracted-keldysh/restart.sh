@@ -3,7 +3,7 @@ set -e
 
 echo "Restart deployment"
 
-export NAMESPACE=dev-starter-pack-naughty-swanson
+export NAMESPACE=dev-investmann-main-distracted-keldysh
 
 echo "Turning off…"
 kubectl scale -n "${NAMESPACE}" --replicas=0 deployment/django

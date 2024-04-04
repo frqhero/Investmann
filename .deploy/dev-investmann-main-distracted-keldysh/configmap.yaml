@@ -3,11 +3,11 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: django
-  namespace: dev-starter-pack-naughty-swanson
+  namespace: dev-investmann-main-distracted-keldysh
 data:
-  DJ__ALLOWED_HOSTS: 'dev-starter-pack-naughty-swanson.sirius-k8s.dvmn.org'
-  DJ__CSRF_TRUSTED_ORIGINS: 'https://dev-starter-pack-naughty-swanson.sirius-k8s.dvmn.org'
+  DJ__ALLOWED_HOSTS: 'dev-investmann-main-distracted-keldysh.sirius-k8s.dvmn.org'
+  DJ__CSRF_TRUSTED_ORIGINS: 'https://dev-investmann-main-distracted-keldysh.sirius-k8s.dvmn.org'
   DJ__DEBUG: 'false'
-  WEBAPP_ROOT_URL: 'https://dev-starter-pack-naughty-swanson.sirius-k8s.dvmn.org'
+  WEBAPP_ROOT_URL: 'https://dev-investmann-main-distracted-keldysh.sirius-k8s.dvmn.org'
   ROLLBAR__ENVIRONMENT: 'development'
   COMMIT_HASH: <COMMIT_HASH>

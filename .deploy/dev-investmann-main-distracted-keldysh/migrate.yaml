@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: django-migrate
-  namespace: dev-starter-pack-naughty-swanson
+  namespace: dev-investmann-main-distracted-keldysh
   labels:
     app.kubernetes.io/name: django
 spec:
@@ -55,7 +55,7 @@ spec:
                 name: bucket
                 key: dsn
                 optional: false
-        image: cr.yandex/crpqm6ldnek2niaf4bsn/django:<COMMIT_HASH>
+        image: cr.yandex/crppvo9bpgsbl1m4dccq/django:<COMMIT_HASH>
         volumeMounts:
           - mountPath: "/root/.postgresql/"
             name: psql-cert

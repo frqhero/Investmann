@@ -4,12 +4,12 @@ set -e
 echo "Updating deployment image and run jobs"
 echo
 
-docker build ../../ -t cr.yandex/crpqm6ldnek2niaf4bsn/django:latest -t cr.yandex/crpqm6ldnek2niaf4bsn/django:$(git rev-parse HEAD)
-docker push --all-tags cr.yandex/crpqm6ldnek2niaf4bsn/django
+docker build ../../ -t cr.yandex/crppvo9bpgsbl1m4dccq/django:latest -t cr.yandex/crppvo9bpgsbl1m4dccq/django:$(git rev-parse HEAD)
+docker push --all-tags cr.yandex/crppvo9bpgsbl1m4dccq/django
 sleep 5
 
 export COMMIT_HASH=$(git rev-parse HEAD)
-export NAMESPACE=dev-starter-pack-naughty-swanson
+export NAMESPACE=dev-investmann-main-distracted-keldysh
 
 cd `dirname "$0"`
 cat configmap.yaml | sed "s/<COMMIT_HASH>/$COMMIT_HASH/" | kubectl apply -f -

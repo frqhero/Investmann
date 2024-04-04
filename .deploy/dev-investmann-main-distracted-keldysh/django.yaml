@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: django
-  namespace: dev-starter-pack-naughty-swanson
+  namespace: dev-investmann-main-distracted-keldysh
   labels:
     app.kubernetes.io/name: django
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: django-container
-        image: cr.yandex/crpqm6ldnek2niaf4bsn/django:<COMMIT_HASH>
+        image: cr.yandex/crppvo9bpgsbl1m4dccq/django:<COMMIT_HASH>
         imagePullPolicy: IfNotPresent
         envFrom:
           - configMapRef:
@@ -64,7 +64,7 @@ spec:
             name: psql-cert
             readOnly: true
       - name: django-worker-container
-        image: cr.yandex/crpqm6ldnek2niaf4bsn/django:<COMMIT_HASH>
+        image: cr.yandex/crppvo9bpgsbl1m4dccq/django:<COMMIT_HASH>
         imagePullPolicy: IfNotPresent
         envFrom:
           - configMapRef:
@@ -114,7 +114,7 @@ spec:
 
       initContainers:
       - name: init-django
-        image: cr.yandex/crpqm6ldnek2niaf4bsn/django:<COMMIT_HASH>
+        image: cr.yandex/crppvo9bpgsbl1m4dccq/django:<COMMIT_HASH>
         imagePullPolicy: IfNotPresent
         command: ["python", "manage.py", "collectstatic", "--noinput"]
         envFrom:
@@ -167,7 +167,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: django-service
-  namespace: dev-starter-pack-naughty-swanson
+  namespace: dev-investmann-main-distracted-keldysh
 spec:
   type: NodePort
   selector:
@@ -176,4 +176,4 @@ spec:
     - port: 80
       protocol: TCP
       targetPort: 80
-      nodePort: 30241
+      nodePort: 30468

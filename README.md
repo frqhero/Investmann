@@ -248,7 +248,7 @@ $ docker compose run --rm django pytest -s test_tools_for_testing.py::test_httpx
 
 Инструкции по развертыванию и обновлению ПО лежат в других файлах README. Каждому окружению — свой набор инструкций в отдельном файле README:
 
-- [Инструкции к окружению `.deploy/dev-starter-pack-naughty-swanson`](.deploy/dev-starter-pack-naughty-swanson/README.md)
+- [Инструкции к окружению `.deploy/dev-investmann-main-distracted-keldysh`](.deploy/dev-investmann-main-distracted-keldysh/README.md)
 
 Чтобы получить публичный IP адрес для вашей разработческой машины сначала авторизуйте ngrok с помощью команды
 `ngrok config add-authtoken`, как это указано в личном кабинете на сайте [https://ngrok.com/](https://ngrok.com/), а затем запустите

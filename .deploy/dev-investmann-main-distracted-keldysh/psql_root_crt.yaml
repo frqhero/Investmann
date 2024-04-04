@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: psql-root-crt
-  namespace: dev-starter-pack-naughty-swanson
+  namespace: dev-investmann-main-distracted-keldysh
 type: Opaque
 data:
   # SSL certificate to Managed PostgreSQL in YandexCloud
