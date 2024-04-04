@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "your-project-name"
-description = "Your Project Name"
+name = "investmann"
+description = "Investmann"
 authors = ["ООО Девман <dvmn.org>"]
 version="0.1.0"
 
