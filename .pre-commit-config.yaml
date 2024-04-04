@@ -1,0 +1,21 @@
+default_language_version:
+  python: 'python3.10'
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-added-large-files
+
+  - repo: local
+    hooks:
+      - id: linters
+        name: linters
+        entry: docker compose run -T --rm linters flake8 /src/
+        language: system
+        pass_filenames: no
+
+      - id: test-django
+        name: test-django
+        entry: docker compose run -T --rm django pytest ./ .contrib-candidates/
+        language: system
+        pass_filenames: no

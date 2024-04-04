@@ -1,0 +1,263 @@
+[
+{
+    "model": "editable_messages.tgtextmessage",
+    "pk": 1,
+    "fields": {
+        "protect_content": false,
+        "series": 1,
+        "message_order": 1,
+        "text": "Welcome!",
+        "disable_web_page_preview": false,
+        "parse_mode": ""
+    }
+},
+{
+    "model": "editable_messages.tgtextmessage",
+    "pk": 2,
+    "fields": {
+        "protect_content": false,
+        "series": 1,
+        "message_order": 2,
+        "text": "First mailing was triggered. Wait for a minute...",
+        "disable_web_page_preview": false,
+        "parse_mode": ""
+    }
+},
+{
+    "model": "editable_messages.tgtextmessage",
+    "pk": 3,
+    "fields": {
+        "protect_content": false,
+        "series": 2,
+        "message_order": 0,
+        "text": "Second mailing was triggered. Wait for a minute...",
+        "disable_web_page_preview": false,
+        "parse_mode": ""
+    }
+},
+{
+    "model": "editable_messages.tgtextmessage",
+    "pk": 4,
+    "fields": {
+        "protect_content": false,
+        "series": 3,
+        "message_order": 0,
+        "text": "Welcome!",
+        "disable_web_page_preview": false,
+        "parse_mode": ""
+    }
+},
+{
+    "model": "editable_messages.tgtextmessage",
+    "pk": 5,
+    "fields": {
+        "protect_content": false,
+        "series": 4,
+        "message_order": 0,
+        "text": "Эхо: {{ echo }}",
+        "disable_web_page_preview": false,
+        "parse_mode": ""
+    }
+},
+{
+    "model": "editable_messages.tgtextmessage",
+    "pk": 6,
+    "fields": {
+        "protect_content": false,
+        "series": 5,
+        "message_order": 0,
+        "text": "Эхо: {{ echo }}",
+        "disable_web_page_preview": false,
+        "parse_mode": ""
+    }
+},
+{
+    "model": "editable_messages.tgtextmessage",
+    "pk": 7,
+    "fields": {
+        "protect_content": false,
+        "series": 6,
+        "message_order": 0,
+        "text": "*📨 1️⃣ It's a first mailing message!*\r\n\r\nSelect an appropriate option:",
+        "disable_web_page_preview": false,
+        "parse_mode": "Markdown"
+    }
+},
+{
+    "model": "editable_messages.tgtextmessage",
+    "pk": 8,
+    "fields": {
+        "protect_content": false,
+        "series": 7,
+        "message_order": 0,
+        "text": "Your choice is: *{{ choice }}*",
+        "disable_web_page_preview": false,
+        "parse_mode": "MarkdownV2"
+    }
+},
+{
+    "model": "editable_messages.tgtextmessage",
+    "pk": 9,
+    "fields": {
+        "protect_content": false,
+        "series": 8,
+        "message_order": 0,
+        "text": "*📨 2️⃣ It's a second mailing message!*\r\n\r\nEnter /start to return to Main Menu.",
+        "disable_web_page_preview": false,
+        "parse_mode": "Markdown"
+    }
+},
+{
+    "model": "editable_messages.tginlinebutton",
+    "pk": 7,
+    "fields": {
+        "text": "Buy first",
+        "callback_data": "buy_first",
+        "url": "",
+        "series": 6,
+        "message_number": 0,
+        "row": 1,
+        "position_in_row": 1
+    }
+},
+{
+    "model": "editable_messages.tginlinebutton",
+    "pk": 8,
+    "fields": {
+        "text": "Buy second",
+        "callback_data": "buy_second",
+        "url": "",
+        "series": 6,
+        "message_number": 0,
+        "row": 1,
+        "position_in_row": 2
+    }
+},
+{
+    "model": "editable_messages.tginlinebutton",
+    "pk": 9,
+    "fields": {
+        "text": "Buy third",
+        "callback_data": "buy_third",
+        "url": "",
+        "series": 6,
+        "message_number": 0,
+        "row": 1,
+        "position_in_row": 3
+    }
+},
+{
+    "model": "editable_messages.tginlinebutton",
+    "pk": 10,
+    "fields": {
+        "text": "Back to welcome message",
+        "callback_data": "welcome",
+        "url": "",
+        "series": 1,
+        "message_number": 1,
+        "row": 1,
+        "position_in_row": 1
+    }
+},
+{
+    "model": "editable_messages.tginlinebutton",
+    "pk": 11,
+    "fields": {
+        "text": "Trigger second mailling",
+        "callback_data": "trigger_second_mailing",
+        "url": "",
+        "series": 1,
+        "message_number": 2,
+        "row": 1,
+        "position_in_row": 1
+    }
+},
+{
+    "model": "editable_messages.tgmessageseries",
+    "pk": 1,
+    "fields": {
+        "namespace": "/main-menu/",
+        "name": "welcome",
+        "language_code": "ru_ru",
+        "draft": false,
+        "disable_notification": false
+    }
+},
+{
+    "model": "editable_messages.tgmessageseries",
+    "pk": 2,
+    "fields": {
+        "namespace": "/main-menu/",
+        "name": "second-trigger-mailing",
+        "language_code": "ru_ru",
+        "draft": false,
+        "disable_notification": false
+    }
+},
+{
+    "model": "editable_messages.tgmessageseries",
+    "pk": 3,
+    "fields": {
+        "namespace": "/welcome/",
+        "name": "welcome",
+        "language_code": "ru_ru",
+        "draft": false,
+        "disable_notification": false
+    }
+},
+{
+    "model": "editable_messages.tgmessageseries",
+    "pk": 4,
+    "fields": {
+        "namespace": "/welcome/",
+        "name": "echo",
+        "language_code": "ru_ru",
+        "draft": false,
+        "disable_notification": false
+    }
+},
+{
+    "model": "editable_messages.tgmessageseries",
+    "pk": 5,
+    "fields": {
+        "namespace": "/main-menu/",
+        "name": "echo",
+        "language_code": "ru_ru",
+        "draft": false,
+        "disable_notification": false
+    }
+},
+{
+    "model": "editable_messages.tgmessageseries",
+    "pk": 6,
+    "fields": {
+        "namespace": "/first-trigger-mailing/",
+        "name": "mailing",
+        "language_code": "ru_ru",
+        "draft": false,
+        "disable_notification": false
+    }
+},
+{
+    "model": "editable_messages.tgmessageseries",
+    "pk": 7,
+    "fields": {
+        "namespace": "/first-trigger-mailing/",
+        "name": "choice",
+        "language_code": "ru_ru",
+        "draft": false,
+        "disable_notification": false
+    }
+},
+{
+    "model": "editable_messages.tgmessageseries",
+    "pk": 8,
+    "fields": {
+        "namespace": "/second-trigger-mailing/",
+        "name": "mailing",
+        "language_code": "ru_ru",
+        "draft": false,
+        "disable_notification": false
+    }
+}
+]

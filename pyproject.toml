@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "your-project-name"
+description = "Your Project Name"
+authors = ["ООО Девман <dvmn.org>"]
+version="0.1.0"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "4.2.1"
+httpx = "0.24.1"
+gunicorn = "20.1.0"
+whitenoise = "6.4.0"
+django-debug-toolbar = "4.1.0"
+pydantic = "1.10.8"
+psycopg2-binary = "2.9.6"
+pytest = {version = "7.3.*", extras = ["anyio"]}
+pytest-django = "4.5.2"
+pytest-httpx = "0.22.0"
+django-non-dark-admin = "2.0.2"
+rollbar = "0.16.3"
+django-storages = "^1.13.2"
+boto3 = "^1.26.149"
+s3-parse-url = "0.3.3"
+tg-api = "1.5.0"
+pillow = "^10.1.0"
+inotify = "0.2.10"  # required by Gunicorn to support --reload feature
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+python_files = "tests.py test_*.py *_tests.py"
+cache_dir = "/pytest_cache_dir"
