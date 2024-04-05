@@ -37,18 +37,6 @@ spec:
                 name: postgres
                 key: dsn
                 optional: false
-          - name: TG__WEBHOOK_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: tg-bot
-                key: webhook_token
-                optional: false
-          - name: TG__BOT_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: tg-bot
-                key: token
-                optional: false
           - name: S3_DSN
             valueFrom:
               secretKeyRef:
