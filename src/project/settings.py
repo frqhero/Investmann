@@ -162,7 +162,8 @@ USE_TZ = True
 
 # Yandex object storage
 
-if ENV.S3_DSN:
+# if ENV.S3_DSN:
+if False:
     AWS_S3_ENDPOINT_URL = ENV.s3_credentials.endpoint_url
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     DEFAULT_FILE_STORAGE = 'project.storage_backends.MediaStorage'
