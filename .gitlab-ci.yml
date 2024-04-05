@@ -1,7 +1,7 @@
 build-django:
   stage: build
   tags:
-    - dev-starter-pack-naughty-swanson
+    - dev-investmann-main-distracted-keldysh
   image:
     # Используем kaniko для создания образов внутри контейнера.
     # GitLab runner requires to use `*-debug` kaniko images to get access to sh
@@ -16,7 +16,7 @@ build-django:
     - /kaniko/executor
         --context "${CI_PROJECT_DIR}"
         --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-        --destination "cr.yandex/crp3h04khu638hf0ob6l/django:${CI_COMMIT_SHA}"
+        --destination "cr.yandex/crppvo9bpgsbl1m4dccq/django:${CI_COMMIT_SHA}"
         --use-new-run
         --cache=true
         --cache-copy-layers
