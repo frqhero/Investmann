@@ -51,42 +51,42 @@ spec:
           - mountPath: "/root/.postgresql/"
             name: psql-cert
             readOnly: true
-      - name: django-worker-container
-        image: cr.yandex/crppvo9bpgsbl1m4dccq/django:<COMMIT_HASH>
-        imagePullPolicy: IfNotPresent
-        envFrom:
-          - configMapRef:
-              name: django
-        env:
-          - name: DJ__SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                name: django
-                key: secret_key
-                optional: false
-          - name: ROLLBAR__BACKEND_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: rollbar
-                key: backend_token
-                optional: false
-          - name: POSTGRES_DSN
-            valueFrom:
-              secretKeyRef:
-                name: postgres
-                key: dsn
-                optional: false
-          - name: S3_DSN
-            valueFrom:
-              secretKeyRef:
-                name: bucket
-                key: dsn
-                optional: false
-        volumeMounts:
-          - mountPath: "/root/.postgresql/"
-            name: psql-cert
-            readOnly: true
-        command: ["./manage.py", "run_worker", "trigger_mailing.funnels.mailing_queue", "-v", "3"]
+#      - name: django-worker-container
+#        image: cr.yandex/crppvo9bpgsbl1m4dccq/django:<COMMIT_HASH>
+#        imagePullPolicy: IfNotPresent
+#        envFrom:
+#          - configMapRef:
+#              name: django
+#        env:
+#          - name: DJ__SECRET_KEY
+#            valueFrom:
+#              secretKeyRef:
+#                name: django
+#                key: secret_key
+#                optional: false
+#          - name: ROLLBAR__BACKEND_TOKEN
+#            valueFrom:
+#              secretKeyRef:
+#                name: rollbar
+#                key: backend_token
+#                optional: false
+#          - name: POSTGRES_DSN
+#            valueFrom:
+#              secretKeyRef:
+#                name: postgres
+#                key: dsn
+#                optional: false
+#          - name: S3_DSN
+#            valueFrom:
+#              secretKeyRef:
+#                name: bucket
+#                key: dsn
+#                optional: false
+#        volumeMounts:
+#          - mountPath: "/root/.postgresql/"
+#            name: psql-cert
+#            readOnly: true
+#        command: ["./manage.py", "run_worker", "trigger_mailing.funnels.mailing_queue", "-v", "3"]
 
       initContainers:
       - name: init-django
