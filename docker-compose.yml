@@ -40,6 +40,36 @@ services:
     depends_on:
       - postgres
 
+  jupyter:
+    container_name: jupyter
+    build:
+      context: ./
+    environment:
+      WEBAPP_ROOT_URL: http://127.0.0.1:8000
+      POSTGRES_DSN: postgres://postgres_user:postgres_password@postgres:5432/postgres_db
+      DJ__SECRET_KEY: empty
+      DJ__DEBUG: 'true'
+      DJ__ALLOWED_HOSTS: '127.0.0.1, localhost, .ngrok-free.app'
+      DJ__CSRF_TRUSTED_ORIGINS: 'https://*.ngrok-free.app'
+      ENABLE_DEBUG_TOOLBAR: 'true'
+      ENABLE_MEDIA_FILES_SERVING: 'true'
+      GUNICORN_CMD_ARGS: '--reload --workers 2'
+      DJANGO_SUPERUSER_USERNAME: 'admin'
+      DJANGO_SUPERUSER_LAST_NAME: 'Админский'
+      DJANGO_SUPERUSER_FIRST_NAME: 'Пользователь'
+      DJANGO_SUPERUSER_PASSWORD: 'admin123'
+      DJANGO_SUPERUSER_EMAIL: 'admin@example.com'
+    ports:
+      - 127.0.0.1:8888:8888
+    volumes:
+      - ./media:/media/
+      - ./src:/opt/app/src/
+      - ./pyproject.toml:/opt/app/pyproject.toml
+      - ./poetry.lock:/opt/app/poetry.lock
+    depends_on:
+      - postgres
+    command: bash -c "DJANGO_ALLOW_ASYNC_UNSAFE=true ./manage.py shell_plus --notebook"
+
   linters:
     build:
       context: ./.linters/
