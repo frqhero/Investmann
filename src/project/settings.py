@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-import sys
 from pathlib import Path
 
 import django
@@ -54,12 +53,20 @@ INSTALLED_APPS = [
 
     # third party apps
     'debug_toolbar',
-    'django_workers',
+    # 'django_workers',
     'storages',
+    'django_extensions',
 
     # custom apps
     'auth.apps.AuthConfig',
 ]
+
+NOTEBOOK_ARGUMENTS = [
+    '--allow-root',
+    '--ip=0.0.0.0',
+    '--port=8888',
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

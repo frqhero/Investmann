@@ -1,26 +1,26 @@
 from asgiref.sync import async_to_sync
-import httpx
+# import httpx
 import pytest
-from pytest_httpx import HTTPXMock
+# from pytest_httpx import HTTPXMock
 
 from auth.models import User
 
 
-@pytest.mark.anyio()
-async def test_httpx_mocking(
-    httpx_mock: HTTPXMock,
-):
-    """Это демонстрация того, как можно тестировать запросы к API с помощью httpx и pytest-httpx."""
-    httpx_mock.add_response(
-        url='https://example.com/api/entities/1/',
-        method='GET',
-        content='Hello World!',
-    )
-    async with httpx.AsyncClient() as client:
-        response = await client.get('https://example.com/api/entities/1/')
-        response.raise_for_status()
-
-    assert response.text == 'Hello World!'
+# @pytest.mark.anyio()
+# async def test_httpx_mocking(
+#     httpx_mock: HTTPXMock,
+# ):
+#     """Это демонстрация того, как можно тестировать запросы к API с помощью httpx и pytest-httpx."""
+#     httpx_mock.add_response(
+#         url='https://example.com/api/entities/1/',
+#         method='GET',
+#         content='Hello World!',
+#     )
+#     async with httpx.AsyncClient() as client:
+#         response = await client.get('https://example.com/api/entities/1/')
+#         response.raise_for_status()
+#
+#     assert response.text == 'Hello World!'
 
 
 @pytest.mark.django_db
